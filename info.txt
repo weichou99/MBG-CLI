@@ -1,0 +1,15 @@
+Document
+http://mybatis.org/generator/
+
+Download
+https://code.google.com/p/mybatis/downloads/list?can=3&q=Product%3DGenerator
+
+
+需要的檔案：
+mybatis-generator-core-1.3.2.jar (MyBatis Generator)。
+ojdbc6-11.2.0.1.0.jar (Jdbc Driver)。
+MyBatis Generator XML設定檔。
+
+
+其他：
+輸出目錄要先建立。

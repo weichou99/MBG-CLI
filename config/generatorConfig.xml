@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+  <!-- 指定jdbc driver的位置 -->
+  <classPathEntry location="C:/jdbc/ojdbc14.jar" />
+
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+
+    <commentGenerator>
+       <!-- true 不要產生註解。 -->
+       <property name="suppressAllComments" value="true" />
+	   <!-- true 不要在註解裡產生timestamp。 -->
+       <property name="suppressDate" value="true" />
+    </commentGenerator>
+
+	<!-- DB連線設定。 -->
+    <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+        connectionURL="jdbc:oracle:thin:@localhost:1521:xe"
+        userId="mpclmuser"
+        password="mpclmuser">
+    </jdbcConnection>
+
+    <!-- DB數字相位的對應。true 數字欄位都對應成BigDecimal，false MyBatis自動判斷。 -->
+<!--    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver> -->
+
+	<!-- 產生 model object。targetPackage輸出的package。targetProject輸出的目錄。 -->
+    <javaModelGenerator targetPackage="model" targetProject="output">
+    </javaModelGenerator>
+
+	<!-- 產生 sqlMap檔(MyBatis Mapper XML設定檔)。targetPackage輸出的package。targetProject輸出的目錄。 -->
+    <sqlMapGenerator targetPackage="xml"  targetProject="output">
+    </sqlMapGenerator>
+
+	<!-- 產生 mapper interface檔。targetPackage輸出的package。targetProject輸出的目錄。 -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="mapper"  targetProject="output">
+    </javaClientGenerator>
+
+	<!-- table element, 設定要產生的檔案的來源db table。 -->
+	<!-- schema, DB schema。 -->
+	<!-- tableName, Table的名稱。 -->
+	<!-- domainObjectName, Model Object的名稱。 -->
+	<!-- enableInsert, 是否要產生 insert 的 method。 -->
+	<!-- enableUpdateByExample, 是否要產生 updateByExample 的 method。 -->
+	<!-- enableUpdateByPrimaryKey, 是否要產生 updateByPrimaryKey 的 method。 -->
+	<!-- enableDeleteByExample, 是否要產生 deleteByExample 的 method。 -->
+	<!-- enableDeleteByPrimaryKey, 是否要產生 deleteByPrimaryKey 的 method。 -->
+    <table schema="mpclmuser" tableName="DEPARTMENTS" domainObjectName="Department">
+		<!-- PK欄位的設定。 -->
+		<generatedKey column="DEPARTMENT_ID" sqlStatement="select DEPARTMENTS_SEQ.NEXTVAL from dual" identity="false" type="pre"></generatedKey>
+
+    	<columnOverride column="DEPARTMENT_ID" javaType="java.lang.Long"></columnOverride>
+    	<columnOverride column="MANAGER_ID" javaType="java.lang.Long"></columnOverride>
+    	<columnOverride column="LOCATION_ID" javaType="java.lang.Long"></columnOverride>
+    </table>
+    <table schema="mpclmuser" tableName="EMPLOYEES" domainObjectName="Employee">
+		<!-- PK欄位的設定。 -->
+		<generatedKey column="EMPLOYEE_ID" sqlStatement="select EMPLOYEES_SEQ.NEXTVAL from dual" identity="false" type="pre"></generatedKey>
+
+    	<columnOverride column="EMPLOYEE_ID" javaType="java.lang.Long"></columnOverride>
+    	<columnOverride column="SALARY" javaType="java.math.BigDecimal"></columnOverride>
+    	<columnOverride column="COMMISSION_PCT" javaType="java.math.BigDecimal"></columnOverride>
+    	<columnOverride column="MANAGER_ID" javaType="java.lang.Long"></columnOverride>
+    	<columnOverride column="DEPARTMENT_ID" javaType="java.lang.Long"></columnOverride>
+    </table>
+    <table schema="mpclmuser" tableName="JOB_HISTORY" domainObjectName="JobHistory">
+    	<columnOverride column="EMPLOYEE_ID" javaType="java.lang.Long"></columnOverride>
+    	<columnOverride column="DEPARTMENT_ID" javaType="java.lang.Long"></columnOverride>
+    </table>
+    <table schema="mpclmuser" tableName="JOBS" domainObjectName="Job">
+    	<columnOverride column="MIN_SALARY" javaType="java.math.BigDecimal"></columnOverride>
+    	<columnOverride column="MAX_SALARY" javaType="java.math.BigDecimal"></columnOverride>
+    </table>
+    <table schema="mpclmuser" tableName="LOCATIONS" domainObjectName="Location">
+		<!-- PK欄位的設定。 -->
+		<generatedKey column="LOCATION_ID" sqlStatement="select LOCATIONS_SEQ.NEXTVAL from dual" identity="false" type="pre"></generatedKey>
+
+    	<columnOverride column="LOCATION_ID" javaType="java.lang.Long"></columnOverride>
+    </table>
+    <table schema="mpclmuser" tableName="REGIONS" domainObjectName="Region">
+    	<columnOverride column="REGION_ID" javaType="java.lang.Long"></columnOverride>
+    </table>
+
+  </context>
+</generatorConfiguration>
